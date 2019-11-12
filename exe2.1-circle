@@ -1,0 +1,16 @@
+import matplotlib.pyplot as plt
+import numpy as np  
+
+fig = plt.figure()
+ax = plt.gca()
+
+t = np.linspace(0, np.pi*2, 1000)
+x = np.cos(t)
+y = -np.sin(t)
+plt.plot(x, y, color='blue', linewidth=2, label='circle')  
+plt.xlabel('x')  
+plt.ylabel('y')  
+plt.ylim(-1.5,1.5)  
+plt.xlim(-1.5,1.5)
+ax.grid()
+plt.show()
