@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Nov 10 19:52:16 2019
+
+@author: li
+"""
+import numpy as np 
+import matplotlib.pyplot as plt
+
+
+x0  =  0
+y0  =  1
+xf  =  1
+
+
+def euler(lamb, step=[]):
+    len_step=len(step)
+    err_global=np.zeros(len_step)
+#    print(step)
+
+    for j in range(len_step):
+        d=step[j]
+        n=int((xf-x0)/d)
+        x  =  np.linspace(x0 ,xf ,n+1)
+        solu =np.exp(-lamb*x)
+        y  =  np.zeros(n+1)
+        y[0] = y0
+
+
+        for i in range(1,n):
+            y[i]= d*(-lamb*x[i-1])+y[i-1]
+        print(y)   
+        err_lokal=np.absolute(y-solu)
+
+        err_global[j]=np.max(err_lokal)
+        
+    plt.loglog(step,err_global)
+
+
+    
+#    err_global[0] = err_lokal[0]    
+#    for i in range(n):
+#        if err_lokal[i+1]>err_global[i]:
+#            err_global[i+1]=err_lokal[i+1]
+#        else:
+#            err_global[i+1]=err_global[i]
+            
+            
+
+lamb=1
+stepe=[10**(-x) for x in range(1,6,1)]
+#    for j in range(len(stepe)):
+
+euler(lamb,stepe)
+plt.title("step: %s lamb: %s"%(stepe,lamb))
+plt.show()
